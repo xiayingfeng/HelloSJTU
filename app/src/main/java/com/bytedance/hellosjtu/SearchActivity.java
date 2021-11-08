@@ -1,6 +1,6 @@
 package com.bytedance.hellosjtu;
-/**
- * @author Orange
+/*
+  @author Orange
  * @date 2021/11/1 22:10
  */
 
@@ -37,12 +37,9 @@ public class SearchActivity extends AppCompatActivity {
         List<String> allItems = notifyChanged();
 
         SearchView searchView = findViewById(R.id.search_view);
-        searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                searchView.setIconified(false);
-                getSupportFragmentManager().beginTransaction().replace(R.id.search_view, new Fragment()).commitAllowingStateLoss();
-            }
+        searchView.setOnClickListener(view -> {
+            searchView.setIconified(false);
+            getSupportFragmentManager().beginTransaction().replace(R.id.search_view, new Fragment()).commitAllowingStateLoss();
         });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -73,11 +70,10 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private List<String> notifyChanged (){
-        String extra = getIntent().getStringExtra("extra");
         List<String> items = new ArrayList<>();
         String[] template = {"这是第","行"};
         for (int i = 0; i < 100; i++) {
-            items.add(template[0] + String.valueOf(i) + template[1]);
+            items.add(template[0] + i + template[1]);
         }
 
         mSearchAdapter.notifyItems(items);
